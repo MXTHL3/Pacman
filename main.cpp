@@ -29,14 +29,20 @@ void initMap(){
                 r=rand()%3;
                 if (r==1){
                     mapMemory[row][col]=1;
-                }    
+                }
+                else{
+                    mapMemory[row][col]=2;
+                }
             }
             if (row%2==1 and col%2==0){
                 r=rand()%3;
                 if (r==1){
                     mapMemory[row][col]=1;
-                }    
-            }
+                }   
+                else{
+                    mapMemory[row][col]=2;
+                }
+            }          
         }
     }
     initMapVar=false;
