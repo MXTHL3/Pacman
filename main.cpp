@@ -22,9 +22,20 @@ bool initMapVar=true
 void initMap(){
     for (unsigned int row=0; row<rowNum; ++row){
         for (unsigned int col=0; col<colNum; ++col){
-            if (col%2==0 and row%2==0){
-               mapMemory[col][row]=1;
-               cout << mapMemory[col][row];
+            if (row%2==0 and col%2==0){
+                mapMemory[row][col]=1;
+            }
+            if (row%2==0 and col%2==1){
+                r=rand()%3;
+                if (r==1){
+                    mapMemory[row][col]=1;
+                }    
+            }
+            if (row%2==1 and col%2==0){
+                r=rand()%3;
+                if (r==1){
+                    mapMemory[row][col]=1;
+                }    
             }
         }
     }
@@ -39,29 +50,11 @@ void show(MinGL &window){
             colX2=round(winHeight/rowNum*row);
             rowY1=round(winWidth/colNum*(col+1));
             rowY2=round(winHeight/rowNum*(row+1));
-            //if (mapMemory[col][row]==1){
-            //    window << Rectangle(Vec2D(colX1, colX2),
-            //                        Vec2D(rowY1, rowY2),
-            //                        KBlue);
-            //}
-
-            if (col<colNum/2+1){
-                r=rand()%2;
-                if (r==1){
-                    if (row%2==1){
-                        window << Rectangle(Vec2D(colX1, colX2),
-                                            Vec2D(rowY1, rowY2),
-                                            KBlue);
-                    }
-                    if (row%2==0){
-                        window << Rectangle(Vec2D(colX1, colX2),
-                                            Vec2D(rowY1, rowY2),
-                                            KBlue);
-                    }
-                }
-            }
-
-
+            if (mapMemory[col][row]==1){
+                window << Rectangle(Vec2D(colX1, colX2),
+                                    Vec2D(rowY1, rowY2),
+                                    KBlue);
+            }          
         }
     }
 }
