@@ -12,8 +12,8 @@ using namespace nsShape;
 
 double winWidth=1200;
 double winHeight=800;
-double colNum=31;
-double rowNum=21;
+double colNum=99;
+double rowNum=99;
 double X1,Y1,X2,Y2;
 int r;
 int rad;
@@ -73,7 +73,23 @@ void initMap(){
     mapMemory[rowNum/2][colNum-1]=0;
     mapMemory[rowNum/2][colNum-1]=2;
 
+    int centerX1=(int)(colNum)/2-2-(int)(colNum)/2%2;
+    int centerY1=(int)(rowNum)/2-2-(int)(rowNum)/2%2;
+    int centerX2=(int)(colNum)/2+3+(int)(colNum)/2%2;
+    int centerY2=(int)(rowNum)/2+3+(int)(rowNum)/2%2;
+    for (int plusCenterY=0; plusCenterY<centerY2-centerY1; ++plusCenterY){
+        for (int plusCenterX=0; plusCenterX<centerX2-centerX1; ++plusCenterX){
+            mapMemory[centerY1+plusCenterY][centerX1+plusCenterX]=1;
+        }
+    }
+
     initMapVar=false;
+}
+
+void keyboard(MinGL &window){
+    if (window.isPressed({'z', false})){
+        cout << 1;
+    }
 }
 
 void show(MinGL &window){
@@ -85,8 +101,8 @@ void show(MinGL &window){
             X2=round(winWidth/colNum*(col+1));
             Y2=round(winHeight/rowNum*(row+1));
             if (mapMemory[row][col]==1){
-                window << Rectangle(Vec2D(X1, Y1),Vec2D(X2, Y2), KNavy);
-                window << Rectangle(Vec2D(X1, Y1-10),Vec2D(X2, Y2-10), KBlue);
+                window << Rectangle(Vec2D(X1, Y1), Vec2D(X2, Y2), KNavy);
+                window << Rectangle(Vec2D(X1, Y1-(Y2-Y1)/4), Vec2D(X2, Y2-(Y2-Y1)/4), KBlue);
             }
             if (mapMemory[row][col]==2){
                 rad=round(double((X2-X1)/6));
@@ -102,11 +118,14 @@ int main(){
     if (initMapVar==true){
        initMap();
     }
+    cout << (int)(colNum)/2%2 << " " << (int)(colNum)/2-1 << " " << (int)(colNum)/2+1 << endl;
+    cout << (int)(rowNum)/2%2 << " " << (int)(rowNum)/2-1 << " " << (int)(rowNum)/2+1;
     MinGL window("Pacman", Vec2D(winWidth, winHeight), Vec2D(0, 0), KBlack);
     window.initGlut();
     window.initGraphic();
     while (window.isOpen()){
         window.clearScreen();
+        keyboard(window);
         show(window);
         window.finishFrame();
         window.getEventManager().clearEvents();
