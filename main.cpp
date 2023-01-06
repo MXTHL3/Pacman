@@ -82,6 +82,9 @@ void initMap(){
             mapMemory[centerY1+plusCenterY][centerX1+plusCenterX]=1;
         }
     }
+    
+    mapMemory[(int)(rowNum*0.75)][(int)(colNum)/2]=0;
+    mapMemory[(int)(rowNum*0.75)][(int)(colNum)/2]=3;
 
     initMapVar=false;
 }
@@ -109,6 +112,9 @@ void show(MinGL &window){
                 X1=round(double(X1+(X2-X1)*0.5));
                 Y1=round(double(Y1+(Y2-Y1)*0.5));
                 window << Circle(Vec2D(X1, Y1), rad, KOrange);
+            }
+            if (mapMemory[row][col]==3){
+                window << Circle(Vec2D(X1+(X2-X1)/2,Y1+(X2-X1)/2), (X2-X1)/2, KYellow);
             }
         }
     }
