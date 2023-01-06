@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include "MinGL2/include/mingl/mingl.h"
 #include "MinGL2/include/mingl/shape/rectangle.h"
+#include "MinGL2/include/mingl/shape/circle.h"
 
 using namespace std;
 using namespace nsGraphics;
@@ -52,15 +53,20 @@ void show(MinGL &window){
     //window << Rectangle(Vec2D(30, 30), Vec2D(30, 30), KWhite);
     for (unsigned int row=0; row<rowNum; ++row){
         for (unsigned int col=0; col<colNum; ++col){
-            colX1=round(winWidth/colNum*col);
-            colX2=round(winHeight/rowNum*row);
-            rowY1=round(winWidth/colNum*(col+1));
-            rowY2=round(winHeight/rowNum*(row+1));
-            if (mapMemory[col][row]==1){
-                window << Rectangle(Vec2D(colX1, colX2),
-                                    Vec2D(rowY1, rowY2),
-                                    KBlue);
-            }          
+            x1=round(winWidth/colNum*col);
+            y1=round(winHeight/rowNum*row);
+            x2=round(winWidth/colNum*(col+1));
+            y2=round(winHeight/rowNum*(row+1));
+            if (mapMemory[row][col]==1){
+                window << Rectangle(Vec2D(x1, y1),Vec2D(x2, y2), KBlue);
+            } 
+            if (mapMemory[row][col]==2){
+                x1=round(x1+(x2-x1)*0.4);
+                y1=round(y1+(y2-y1)*0.4);
+                x1=round(x2-(x2-x1)*0.4);
+                y1=round(y2-(y2-y1)*0.4);
+                window << Circle(Vec2D(x1, y1),Vec2D(x2, y2), KOrange);
+            }
         }
     }
 }
