@@ -22,28 +22,37 @@ vector<vector <int>> mapMemory (rowNum, vector<int>(colNum,0));
 bool initMapVar=true
 void initMap(){
     for (unsigned int row=0; row<rowNum; ++row){
-        for (unsigned int col=0; col<colNum; ++col){
+        for (unsigned int col=0; col<colNum/2+1; ++col){
             if (row%2==0 and col%2==0){
                 mapMemory[row][col]=1;
+                mapMemory[row][colNum-col-1]=1;
             }
             if (row%2==0 and col%2==1){
-                r=rand()%3;
+                r=rand()%5;
                 if (r==1){
                     mapMemory[row][col]=1;
+                    mapMemory[row][colNum-col-1]=1;
                 }
                 else{
                     mapMemory[row][col]=2;
+                    mapMemory[row][colNum-col-1]=2;
                 }
             }
             if (row%2==1 and col%2==0){
-                r=rand()%3;
+                r=rand()%5;
                 if (r==1){
                     mapMemory[row][col]=1;
-                }   
+                    mapMemory[row][colNum-col-1]=1;
+                }
                 else{
                     mapMemory[row][col]=2;
+                    mapMemory[row][colNum-col-1]=2;
                 }
-            }          
+            }
+            if (row%2==1 and col%2==1){
+                mapMemory[row][col]=2;
+                mapMemory[row][colNum-col-1]=2;
+            }
         }
     }
     initMapVar=false;
