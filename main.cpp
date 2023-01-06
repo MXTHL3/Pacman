@@ -53,19 +53,17 @@ void show(MinGL &window){
     //window << Rectangle(Vec2D(30, 30), Vec2D(30, 30), KWhite);
     for (unsigned int row=0; row<rowNum; ++row){
         for (unsigned int col=0; col<colNum; ++col){
-            x1=round(winWidth/colNum*col);
-            y1=round(winHeight/rowNum*row);
-            x2=round(winWidth/colNum*(col+1));
-            y2=round(winHeight/rowNum*(row+1));
+            X1=round(winWidth/colNum*col);
+            Y1=round(winHeight/rowNum*row);
+            X2=round(winWidth/colNum*(col+1));
+            Y2=round(winHeight/rowNum*(row+1));
             if (mapMemory[row][col]==1){
-                window << Rectangle(Vec2D(x1, y1),Vec2D(x2, y2), KBlue);
-            } 
+                window << Rectangle(Vec2D(X1, Y1),Vec2D(X2, Y2), KBlue);
+            }
             if (mapMemory[row][col]==2){
-                x1=round(x1+(x2-x1)*0.4);
-                y1=round(y1+(y2-y1)*0.4);
-                x1=round(x2-(x2-x1)*0.4);
-                y1=round(y2-(y2-y1)*0.4);
-                window << Circle(Vec2D(x1, y1),Vec2D(x2, y2), KOrange);
+                X1=round(double(X1+(X2-X1)*0.4));
+                Y1=round(double(Y1+(Y2-Y1)*0.4));
+                window << Circle(Vec2D(X1, Y1),5, KOrange);
             }
         }
     }
