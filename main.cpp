@@ -12,8 +12,8 @@ using namespace nsShape;
 
 double winWidth=1200;
 double winHeight=800;
-double colNum=99;
-double rowNum=99;
+double colNum=31;
+double rowNum=21;
 double X1,Y1,X2,Y2;
 int r;
 int rad;
@@ -79,10 +79,16 @@ void initMap(){
     int centerY2=(int)(rowNum)/2+3+(int)(rowNum)/2%2;
     for (int plusCenterY=0; plusCenterY<centerY2-centerY1; ++plusCenterY){
         for (int plusCenterX=0; plusCenterX<centerX2-centerX1; ++plusCenterX){
-            mapMemory[centerY1+plusCenterY][centerX1+plusCenterX]=1;
+            if ((plusCenterY==0 and plusCenterX!=(centerX2-centerX1)/2) or plusCenterY==centerY2-centerY1-1 or
+                plusCenterX==0 or plusCenterX==centerX2-centerX1-1){
+                mapMemory[centerY1+plusCenterY][centerX1+plusCenterX]=1;
+            }
+            else{
+                mapMemory[centerY1+plusCenterY][centerX1+plusCenterX]=0;
+            }
         }
     }
-    
+
     mapMemory[(int)(rowNum*0.75)][(int)(colNum)/2]=0;
     mapMemory[(int)(rowNum*0.75)][(int)(colNum)/2]=3;
 
